@@ -14,7 +14,7 @@ export default createMaterialBottomTabNavigator({
   Home: {
     screen:HomeScreen
   },
-  Me: {
+  Profile: {
     screen:AccountScreen
   }
 },{

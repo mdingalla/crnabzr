@@ -37,7 +37,7 @@ export  default  navigationOptions = ({ navigation }) => ({
               ? `ios-home${focused ? '' : '-outline'}`
               : 'md-home';
           break;
-        case 'Me':
+        case 'Profile':
           iconName = Platform.OS === 'ios' ? `ios-person${focused ? '' : '-outline'}` : 'md-person';
           break;
 
