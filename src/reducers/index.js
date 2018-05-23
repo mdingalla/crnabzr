@@ -1,8 +1,11 @@
-import {combineReducers} from 'redux';
-import countReducer from './countReducer.js';
-
-const allReducers= combineReducers({
-    count: countReducer,
-});
-
-export default allReducers;
+const rehydrated = (state = false, action) => {
+    switch (action.type) {
+      case 'persist/REHYDRATE':
+        return true;
+      default:
+        return state;
+    }
+  };
+export default {
+    rehydrated
+}

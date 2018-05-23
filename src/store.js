@@ -1,12 +1,35 @@
-import { Store, createStore, applyMiddleware } from 'redux';
-// import { History } from 'history';
-import allReducers from './reducers';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { persistStore, persistCombineReducers } from 'redux-persist';
+import storage from 'redux-persist/es/storage'; // default: localStorage if web, AsyncStorage if react-native
 import thunk from 'redux-thunk';
+import allReducers from './reducers';
 
-export function configureStore(initialState){
-    let middleware = applyMiddleware(thunk);
+// Redux Persist config
+const config = {
+    key: 'root',
+    storage,
+    blacklist: ['status'],
+  };
 
-    const store = createStore(allReducers,initialState,middleware);
+const reducer = persistCombineReducers(config, allReducers);
 
-    return store
-}
+const middleware = [thunk];
+
+
+const configureStore = () => {
+    const store = createStore(
+      reducer,
+      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+      compose(applyMiddleware(...middleware)),
+    );
+  
+    const persistor = persistStore(
+      store,
+      null,
+      () => { store.getState(); },
+    );
+  
+    return { persistor, store };
+  };
+  
+  export default configureStore;

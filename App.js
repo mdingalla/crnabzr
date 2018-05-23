@@ -1,23 +1,9 @@
-import React, { Component } from 'react';
-import {createStore} from 'redux';
-import {Provider} from 'react-redux';
-import {configureStore}  from './src/store';
-// import allReducers from './src/reducers/';
-import CreateReactNativeApp from './src/native';
+import React from 'react';
+import Root from './src/native/index';
+import configureStore from './src/store';
 
-const store = configureStore();
+const { persistor, store } = configureStore();
 
-// const store = createStore(allReducers);
-
-
-export default class App extends React.Component {
-  render() {
-    return(
-      <Provider store= {store}>
-        <CreateReactNativeApp />
-     </Provider>
-    );
-  }
+export default function App() {
+  return <Root store={store} persistor={persistor} />;
 }
-
-

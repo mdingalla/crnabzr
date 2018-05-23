@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Button,
   FlatList,
   Image,
   Platform,
@@ -8,13 +7,13 @@ import {
   StyleSheet,
   Linking,
   AsyncStorage,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from './../../constants/Colors';
 import homeBottomNavigation from './../navigation/HomeBottomNavigation';
+import { Container, Content, H1, H2, H3,Text, Button } from 'native-base';
 
 import axios from 'axios'
 
@@ -74,16 +73,18 @@ export default class HomeScreen extends React.Component {
 
         const {items} = this.state;
         return (
-            <View>
-              <Text>Home</Text>
-              
-              <FlatList
-                data={items}
-                extraData={this.state}
-                keyExtractor={this._keyExtractor}
-                renderItem={this._renderItem}
-            />
-            </View>
+            <Container>
+             <Content>
+                <Text>Home</Text>
+                
+                {/* <FlatList
+                    data={items}
+                    extraData={this.state}
+                    keyExtractor={this._keyExtractor}
+                    renderItem={this._renderItem}
+                /> */}
+                 </Content>
+            </Container>
           ); 
     }
 }

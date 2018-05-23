@@ -1,22 +1,43 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import MainTabNavigator from '../components/navigation/MainTabNavigator';
+import { StatusBar, Platform } from 'react-native';
+import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
+import { Router, Stack } from 'react-native-router-flux';
+import { PersistGate } from 'redux-persist/es/integration/react';
+import { Root, StyleProvider } from 'native-base';
 
 
+import getTheme from '../../native-base-theme/components';
+import theme from '../../native-base-theme/variables/commonColor';
 
-export default class App extends React.Component {
-  render() {
-    return (
-        <MainTabNavigator />
-    );
-  }
-}
+import Routes from './../routes';
+import Loading from './../components/screens/Loading';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+// Hide StatusBar on Android as it overlaps tabs
+if (Platform.OS === 'android') StatusBar.setHidden(true);
+
+const App = ({ store, persistor }) => (
+  <Root>
+    <Provider store={store}>
+      <PersistGate
+        loading={<Loading />}
+        persistor={persistor}
+      >
+        <StyleProvider style={getTheme(theme)}>
+          <Router>
+            <Stack key="root">
+              {Routes}
+            </Stack>
+          </Router>
+        </StyleProvider>
+      </PersistGate>
+    </Provider>
+  </Root>
+);
+
+App.propTypes = {
+  store: PropTypes.shape({}).isRequired,
+  persistor: PropTypes.shape({}).isRequired,
+};
+
+export default App;

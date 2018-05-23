@@ -1,19 +1,19 @@
 import React from 'react';
 import {
-  Button,
   Image,
   Platform,
   ScrollView,
   StyleSheet,
   Linking,
   AsyncStorage,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from './../../constants/Colors';
 import homeBottomNavigation from './../navigation/HomeBottomNavigation';
+// import Container from '../../../native-base-theme/components/Container';
+import { Container, Content, H1, H2, H3,Text, Button } from 'native-base';
 
 
 export default class AccountScreen extends React.Component {
@@ -21,9 +21,12 @@ export default class AccountScreen extends React.Component {
 
     render(){
         return (
-            <View>
-              <Text>My Profile</Text>
-            </View>
+            <Container>
+              
+             <Content>
+             <Text>My Profile</Text>
+               </Content>
+            </Container>
           ); 
     }
 }
