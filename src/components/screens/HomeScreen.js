@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Button,
+  FlatList,
   Image,
   Platform,
   ScrollView,
@@ -29,6 +30,16 @@ export default class HomeScreen extends React.Component {
         }
     }
 
+    _keyExtractor = (item, index) => item.id.toString();
+
+    _renderItem = ({item}) => (
+        <View>
+            <Text>{item.name}</Text>
+        <Image source={{uri: item.images[0].src}}
+       style={{width: 200, height: 200}} />
+            </View>
+      );
+
     componentDidMount(){
         var self = this;
 
@@ -36,28 +47,12 @@ export default class HomeScreen extends React.Component {
       const cs = 'cs_467cecde39e4fb59af5644f6729c0813a6508580'
       const url = 'https://baczar.com/wp-json/wc/v2/products'
 
-    //   const oauth = OAuth({
-    //     consumer: {
-    //         key: ck,
-    //         secret: cs
-    //     },
-    //     signature_method: 'HMAC-SHA1',
-    //     hash_function: function(base_string, key) {
-    //         return CryptoJS.enc.Base64.stringify(CryptoJS.HmacSHA1(base_string, key));
-    //     }
-    //   });
-
-    //   const requestData = {
-    //     url: url,
-    //     method: 'GET'
-    // };
-
         axios.get(
             'https://baczar.com/wp-json/wc/v1/products?consumer_key=ck_9314ca05c4c8856c730482cf55c7f3e4014d6f2b&consumer_secret=cs_467cecde39e4fb59af5644f6729c0813a6508580'
             // requestData.url + '?' + jParam(oauth.authorize(requestData))
             // requestData.url
         ).then(function(response){
-            //console.log(response.data)
+            console.log(response.data)
             self.setState({
                 items:response.data
             });
@@ -81,7 +76,13 @@ export default class HomeScreen extends React.Component {
         return (
             <View>
               <Text>Home</Text>
-              <Text>{items.length}</Text>
+              
+              <FlatList
+                data={items}
+                extraData={this.state}
+                keyExtractor={this._keyExtractor}
+                renderItem={this._renderItem}
+            />
             </View>
           ); 
     }
