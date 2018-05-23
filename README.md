@@ -204,5 +204,6 @@ If this causes problems for you, you may want to try changing your terminal's co
 
 ### Added Frameworks
 
- - Redux
- - Reudx thunk
+ - Redux (https://redux.js.org/)
+ - Reudx thunk (https://github.com/reduxjs/redux-thunk)
+ - NativeBase (https://nativebase.io/)
