@@ -5,8 +5,8 @@ export default {
     navigationBarStyle: { backgroundColor: 'white' },
     titleStyle: {
       color: Colors.textColor,
-      alignSelf: 'center',
-      letterSpacing: 2,
+      alignSelf: "center",
+      // letterSpacing: 2,
       fontSize: Colors.fontSizeBase,
     },
     backButtonTintColor: Colors.textColor,
@@ -17,6 +17,9 @@ export default {
     activeBackgroundColor: 'rgba(255,255,255,0.1)',
     inactiveBackgroundColor: Colors.brandPrimary,
     tabBarStyle: { backgroundColor: Colors.brandPrimary },
+    tabBarPosition:'bottom',
+    headerMode:'none'
+    
   },
 
   icons: {
